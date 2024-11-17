@@ -22,8 +22,14 @@ def upgrade() -> None:
     op.create_table(
         'users',
         sa.Column('id', sa.Integer, primary_key=True),
-        sa.Column('login', sa.String(50), nullable=False),
+        sa.Column('name', sa.String(15), nullable=False),
+        sa.Column('last_name', sa.String(15), nullable=False),
+        sa.Column('email', sa.String(20), nullable=False),
         sa.Column('password', sa.String(50)),
+        sa.Column('bday', sa.String(10), nullable=False),
+        sa.Column('sex', sa.String(10), nullable=False),
+        sa.Column('interests', sa.ARRAY(item_type=sa.String()), nullable=False),
+        sa.Column('city', sa.String(50), nullable=False),
     )
 
 
