@@ -25,6 +25,13 @@ class UserService:
         return await user_repository.UsersRepository.create(db=db, user=user)
 
     @staticmethod
+    async def get_user_by_email(email: str, db: SessionLocal):
+        rs = await user_repository.UsersRepository.get_by_email(db=db, email=email)
+        if not rs:
+            raise HTTPException(status_code=400, detail=f"User with id: {email} no found")
+        return rs
+
+    @staticmethod
     async def get_user_by_id(user_id: int, db: SessionLocal):
         rs = await user_repository.UsersRepository.get_by_id(db=db, user_id=user_id)
         if not rs:

@@ -16,5 +16,12 @@ curl -v -X POST "http://127.0.0.1:8000/api/v1/user" \
 #Get user by Id
 curl http://127.0.0.1:8000/api/v1/user/2
 
-#Get auth token
-curl -v -F username=user1@test.com -F password=123 http://127.0.0.1:8000/token
+#Auth and get profile data
+auth_token=$(curl -v -F username=user1@test.com -F password=123 http://127.0.0.1:8000/token | jq -r '.access_token') && \
+curl -v "http://127.0.0.1:8000/users/me" \
+-H "Authorization: Bearer $auth_token"
+
+#Auth with incorrect password
+auth_token=$(curl -v -F username=user1@test.com -F password=incorrect_pwd http://127.0.0.1:8000/token | jq -r '.access_token') && \
+curl -v "http://127.0.0.1:8000/users/me" \
+-H "Authorization: Bearer $auth_token"
