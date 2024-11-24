@@ -25,11 +25,11 @@ def upgrade() -> None:
         sa.Column('name', sa.String(15), nullable=False),
         sa.Column('last_name', sa.String(15), nullable=False),
         sa.Column('email', sa.String(20), nullable=False),
-        sa.Column('password', sa.String(50)),
+        sa.Column('password', sa.String(255), nullable=False),
         sa.Column('bday', sa.String(10), nullable=False),
         sa.Column('sex', sa.String(10), nullable=False),
-        sa.Column('interests', sa.ARRAY(item_type=sa.String()), nullable=False),
-        sa.Column('city', sa.String(50), nullable=False),
+        sa.Column('interests', sa.ARRAY(item_type=sa.String()), nullable=True),
+        sa.Column('city', sa.String(50), nullable=True),
     )
 
 
