@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  postgres:
+    image: "postgres:17.1"
+    container_name: "postgres"
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "admin"
+    networks:
+      - app_network
+
+  app:
+    build: .
+    container_name: "fapi"
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+    networks:
+      - app_network
+
+networks:
+  app_network:

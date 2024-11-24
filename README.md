@@ -1,1 +1,3 @@
-# fapi_net
+Run app:
+
+> docker-compose up
